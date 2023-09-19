@@ -15,39 +15,3 @@ In this assignment, you will create a Python script that analyzes the financial 
 *The greatest increase in profits (date and amount) over the entire period
 
 *The greatest decrease in losses (date and amount) over the entire period
-
-# My Code
-
-import pandas as pd
-
-### Load the CSV file into a DataFrame
-file_path = 'budget_data.csv'
-df = pd.read_csv(file_path)
-
-### Calculate the total number of months
-total_months = len(df)
-
-### Calculate the net total amount of Profit/Losses
-net_total = df['Profit/Losses'].sum()
-
-### Calculate the changes in Profit/Losses and find the average change
-df['Change'] = df['Profit/Losses'].diff()
-average_change = df['Change'].mean()
-
-### Find the greatest increase and decrease in profits
-greatest_increase = df.loc[df['Change'].idxmax()]
-greatest_decrease = df.loc[df['Change'].idxmin()]
-
-
-### Format the output
-analysis_result = f'''
-Financial Analysis
-----------------------------
-Total Months: {total_months}
-Total: ${net_total:,.2f}
-Average Change: ${average_change:,.2f}
-Greatest Increase in Profits: {greatest_increase['Date']} (${greatest_increase['Change']:,.2f})
-Greatest Decrease in Profits: {greatest_decrease['Date']} (${greatest_decrease['Change']:,.2f})
-'''
-
-print(analysis_result)
